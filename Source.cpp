@@ -9,6 +9,7 @@ void solution02();
 void solution03();
 void solution04();
 void solution05();
+void solution06();
 
 void menu();
 
@@ -42,6 +43,9 @@ int main(int argc, char* argv[])
 		case 6:
 			solution05();
 			break;
+		case 7:
+			solution06();
+			break;
 		case 0:
 			printf("Программа закончила свое выполнение. Нажмите на любую кнопку для выхода из программы...\n");
 			break;
@@ -63,6 +67,7 @@ void menu()
 	printf("4. Решение задачи 4\n");
 	printf("5. Решение задачи 5\n");
 	printf("6. Решение задачи 6\n");
+	printf("7. Решение задачи 7\n");
 	printf("0. Завершение выполнения программы\n");
 }
 
@@ -239,7 +244,7 @@ void solution04()
 	int month = 0;
 	printf("Введите номер месяца: ");
 	scanf("%d", &month);
-
+	// Решение
 	switch (month)
 	{
 	case 1:
@@ -271,7 +276,7 @@ void solution05()
 	int year = 0;
 	printf("Введите возраст от 1 до 150: ");
 	scanf("%d", &year);
-
+	// Решение
 	int n = year % 20;
 	switch (n)
 	{
@@ -300,5 +305,49 @@ void solution05()
 		break;
 	}
 
+	printf("\n##########################################\n\n");
+}
+
+typedef struct tagPoint {
+	int x;
+	int y;
+} Point;
+
+typedef int bool;
+#define true 1
+#define false 0
+
+bool isWhite(Point point)
+{
+	return (point.x % 2) != (point.y % 2);
+}
+
+bool isEquilColor(Point firstFigure, Point secondFigure)
+{
+	return !(isWhite(firstFigure) ^ isWhite(secondFigure));
+}
+
+// Задание 7: С клавиатуры вводятся числовые координаты двух полей шахматной доски (x1,y1,x2,y2). Требуется определить, относятся поля к одному цвету или нет.
+void solution06()
+{
+	printf("\n##########################################\n");
+	printf("\nУсловие задачи:\n");
+	printf("С клавиатуры вводятся числовые координаты двух полей шахматной доски (x1,y1,x2,y2). Требуется определить, относятся поля к одному цвету или нет.\n");
+	// Ввод данных
+	Point firstFigure;
+	printf("Введите координаты первой фигуры: ");
+	scanf("%d %d", &firstFigure.x, &firstFigure.y);
+	Point secondFigure;
+	printf("Введите координаты первой фигуры: ");
+	scanf("%d %d", &secondFigure.x, &secondFigure.y);
+	// Решение
+	if (isEquilColor(firstFigure, secondFigure))
+	{
+		printf("Поля относятся к одинаковому цвету");
+	} 
+	else
+	{
+		printf("Поля относятся к разному цвету");
+	}
 	printf("\n##########################################\n\n");
 }
