@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <malloc.h>
 #include <stdlib.h>
 #include <locale.h>
 #include <math.h>
@@ -17,6 +18,7 @@ void solution09();
 void solution10();
 void solution11();
 void solution12();
+void solution13();
 
 void menu();
 
@@ -70,6 +72,9 @@ int main(int argc, char* argv[])
 			break;
 		case 13:
 			solution12();
+			break;
+		case 14:
+			solution13();
 			break;
 		case 0:
 			printf("Программа закончила свое выполнение.\n");
@@ -556,5 +561,84 @@ void solution12()
 	printf("Результат: ");
 	printf("\nСлучайное число без rand равно %d\n", value_without_rand);
 	printf("Случайное число с rand равно %d\n", value_with_rand);
+	endTask();
+}
+
+bool isNatural(int number)
+{
+	int count = number + 10;
+	int *arr = (int *)malloc(count * sizeof(int));
+	for (int i = 0; i < count; i++)
+	{
+		arr[i] = i;
+	}
+
+	printf("Натуральные простые числа: \n");
+	for (int i = 2; i*i <= count; i++)
+	{
+		if (arr[i] != 0)
+		{
+			for (int j = i * i; j < count; j+=i)
+			{
+				arr[j] = false;
+			}
+		}
+	}
+	bool isN = false;
+	for (int i = 0; i < count; i++)
+	{
+		if (arr[i] != 0)
+			printf(" %d", i);
+		if ((arr[i] != 0) && (number == arr[i]))
+			isN = true;
+	}
+	free(arr);
+	return isN;
+}
+
+// Задание 14: *Автоморфные числа. Натуральное число называется автоморфным, если оно равно последним цифрам своего квадрата. Например, 252 = 625. Напишите программу, которая вводит натуральное число N и выводит на экран все автоморфные числа, не превосходящие N.
+void solution13()
+{
+	descriptionTask("*Автоморфные числа. Натуральное число называется автоморфным, если оно равно последним цифрам своего квадрата. Например, 252 = 625. Напишите программу, которая вводит натуральное число N и выводит на экран все автоморфные числа, не превосходящие N.\n");
+	// Ввод данных
+	int N;
+	printf("Введите число: ");
+	scanf("%d", &N);
+	// Решение
+	printf("Результат: ");
+	bool temp = isNatural(N);
+	if(temp == false)
+	{
+		printf("\nВведено не простое натуральное число.\n");
+	}
+	else 
+	{
+		printf("\nВведено простое натуральное число.\n");
+		printf("\nАвтоморфные числа до %d:\n", N);
+		for (int i = 0; i < N; i++)
+		{
+			int pI = (int)pow(i, 2);
+			int k = 0, n0 = i, m = 0, pi0 = pI;
+			bool isAutomorf = true;
+			while (n0 > 0)
+			{
+				k = n0 % 10;
+				n0 = div(n0, 10).quot;
+				m = pi0 % 10;
+				pi0 = div(pi0, 10).quot;
+				if (k != m)
+				{
+					isAutomorf = false;
+				}
+			}
+			if (isAutomorf == true)
+			{
+				printf("%d(%d)", i, pI);
+			}
+		}
+	}
+
+
+	
 	endTask();
 }
