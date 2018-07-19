@@ -15,6 +15,7 @@ void solution07();
 void solution08();
 void solution09();
 void solution10();
+void solution11();
 
 void menu();
 
@@ -63,6 +64,9 @@ int main(int argc, char* argv[])
 		case 11:
 			solution10();
 			break;
+		case 12:
+			solution11();
+			break;
 		case 0:
 			printf("Программа закончила свое выполнение.\n");
 			break;
@@ -89,6 +93,9 @@ void menu()
 	printf("9. Решение задачи 9\n");
 	printf("10. Решение задачи 10\n");
 	printf("11. Решение задачи 11\n");
+	printf("12. Решение задачи 12\n");
+	printf("13. Решение задачи 13\n");
+	printf("14. Решение задачи 14\n");
 	printf("0. Завершение выполнения программы\n");
 }
 
@@ -125,9 +132,9 @@ void solution00()
 	printf("%lf\n", getIndexMassBody(m, h));
 	endTask();
 }
-int getMaxOf(int a, int b, int c, int d)
+double getMaxOfThree(double a, double b, double c)
 {
-	int max = a;
+	double max = a;
 	if (max < b)
 	{
 		max = b;
@@ -136,6 +143,11 @@ int getMaxOf(int a, int b, int c, int d)
 	{
 		max = c;
 	}
+	return max;
+}
+double getMaxOfFour(double a, double b, double c, double d)
+{
+	double max = getMaxOfThree(a, b, c);
 	if (max < d)
 	{
 		max = d;
@@ -147,21 +159,21 @@ void solution01()
 {
 	descriptionTask("Найти максимальное из четырех чисел. Массивы не использовать.\n");
 	// Ввод данных
-	int a = 0;
+	double a = 0;
 	printf("Введите первое число: ");
-	scanf("%d", &a);
-	int b = 0;
+	scanf("%lf", &a);
+	double b = 0;
 	printf("Введите второе число: ");
-	scanf("%d", &b);
-	int c = 0;
+	scanf("%lf", &b);
+	double c = 0;
 	printf("Введите третье число: ");
-	scanf("%d", &c);
-	int d = 0;
+	scanf("%lf", &c);
+	double d = 0;
 	printf("Введите четвертое число: ");
-	scanf("%d", &d);
+	scanf("%lf", &d);
 	// Решение
 	printf("Результат: ");
-	printf("%d\n", getMaxOf(a, b, c, d));
+	printf("%lf\n", getMaxOfFour(a, b, c, d));
 	endTask();
 }
 // Простой обмен
@@ -266,6 +278,7 @@ void solution04()
 	printf("Введите номер месяца: ");
 	scanf("%d", &month);
 	// Решение
+	printf("Результат: ");
 	switch (month)
 	{
 	case 1:
@@ -296,6 +309,7 @@ void solution05()
 	printf("Введите возраст от 1 до 150: ");
 	scanf("%d", &year);
 	// Решение
+	printf("Результат: ");
 	int n = year % 20;
 	switch (n)
 	{
@@ -358,6 +372,7 @@ void solution06()
 	printf("Введите координаты первой фигуры: ");
 	scanf("%d %d", &secondFigure.x, &secondFigure.y);
 	// Решение
+	printf("Результат: ");
 	if (isEquilColor(firstFigure, secondFigure))
 	{
 		printf("Поля относятся к одинаковому цвету");
@@ -380,12 +395,14 @@ void solution07()
 	int b;
 	printf("Введите второе число: ");
 	scanf("%d", &b);
+
+	// Решение
+	printf("Результат: ");
 	if (a > b)
 	{
 		printf("Вы ввели первое число больше второго, числа будут поменены местами.\n");
 		swap(&a, &b);
 	}
-	// Решение
 	for (int i = a; i <= b; i++)
 	{
 		printf("Квадрат числа %d равен %lf, Куб числа %d равен %lf\n", i, pow(i, 2), i, pow(i, 3));
@@ -412,6 +429,7 @@ void solution08()
 		int_part++;
 		n -= k;
 	}
+	printf("Результат: ");
 	printf("Целая часть %d остаток от деления %d\n", int_part, n);
 
 	endTask();
@@ -439,6 +457,7 @@ void solution09()
 		}
 		n0 = div(n0, 10).quot;
 	}
+	printf("Результат: ");
 	if (hasEven == true)
 	{
 		printf("Число %d содержит нечетные цифры", n);
@@ -471,6 +490,7 @@ void solution10()
 	}
 
 	// Решение
+	printf("Результат: ");
 	if (count > 0)
 	{
 		printf("Среднее арифметическое всех введенных положительных четных чисел оканчивающихся на 8 равно %d\n", sum / count);
@@ -479,5 +499,27 @@ void solution10()
 	{
 		printf("Введенные числа не содержат положительных четных чисел оканчивающихся на 8.\n");
 	}
+	endTask();
+}
+
+// Задание 12: Написать функцию нахождения максимального из трех чисел.
+void solution11()
+{
+	descriptionTask("Написать функцию нахождения максимального из трех чисел.\n");
+	// Ввод данных
+	double a;
+	printf("Введите первое число: ");
+	scanf("%lf", &a);
+	double b;
+	printf("Введите второе число: ");
+	scanf("%lf", &b);
+	double c;
+	printf("Введите третье число: ");
+	scanf("%lf", &c);
+
+	// Решение
+	double max = getMaxOfThree(a, b, c);
+	printf("Результат: ");
+	printf("Максимальное число из %lf, %lf, %lf является %lf\n", a, b, c, max);
 	endTask();
 }
