@@ -16,6 +16,7 @@ void solution08();
 void solution09();
 void solution10();
 void solution11();
+void solution12();
 
 void menu();
 
@@ -66,6 +67,9 @@ int main(int argc, char* argv[])
 			break;
 		case 12:
 			solution11();
+			break;
+		case 13:
+			solution12();
 			break;
 		case 0:
 			printf("Программа закончила свое выполнение.\n");
@@ -521,5 +525,36 @@ void solution11()
 	double max = getMaxOfThree(a, b, c);
 	printf("Результат: ");
 	printf("Максимальное число из %lf, %lf, %lf является %lf\n", a, b, c, max);
+	endTask();
+}
+
+int prev_rand_value = 1;
+
+int genRand()
+{
+	int A = 5;
+	int B = 3;
+	int M = 99;
+	int value_without_rand = (A*prev_rand_value + B) % M + 1;
+	prev_rand_value = value_without_rand;
+	return value_without_rand;
+}
+
+// Задание 13: * Написать функцию, генерирующую случайное число от 1 до 100.
+//					а) с использованием стандартной функции rand()
+//					б) без использования стандартной функции rand()
+void solution12()
+{
+	descriptionTask("* Написать функцию, генерирующую случайное число от 1 до 100.\n\tа) с использованием стандартной функции rand()\n\tб) без использования стандартной функции rand()\n");
+	// Ввод данных
+
+	int prev_value = 0;
+	// Решение
+	int value_without_rand = genRand();
+	int value_with_rand = rand() % 99 + 1;
+	
+	printf("Результат: ");
+	printf("\nСлучайное число без rand равно %d\n", value_without_rand);
+	printf("Случайное число с rand равно %d\n", value_with_rand);
 	endTask();
 }
